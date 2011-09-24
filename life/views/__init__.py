@@ -11,3 +11,4 @@
 """
 
 from life.views.frontend import frontend
+from life.views.user import bc

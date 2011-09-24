@@ -12,7 +12,7 @@
     :license: GPLv3
 """
 
-from flask import Flask
+from flask import Flask, render_template
 
 from life.config import Config, DevConfig, ProConfig
 from life.extensions import db
@@ -27,6 +27,7 @@ DEFAULT_APP_NAME = "life"
 ## 程序模块
 DEFAULT_MODULES = (
     (views.frontend, ""),
+    (views.bc, '/user'),
     )
 
 def create_app(config=None, app_name=None, modules=None):
@@ -42,6 +43,7 @@ def create_app(config=None, app_name=None, modules=None):
 
     configure_app(app, config)
     configure_extensions(app)
+    configure_errorhandler(app)
     configure_modules(app, modules)
 
     return app
@@ -66,3 +68,10 @@ def configure_extensions(app):
     """配置各类扩展"""
     
     db.init_app(app)
+
+def configure_errorhandler(app):
+    """各种错误"""
+
+    @app.errorhandler(404)
+    def page_not_found(error):
+        return render_template('error/page_404.html'), 404
