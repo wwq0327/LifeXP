@@ -5,13 +5,14 @@
 {% include "user/_nv.html" %}
 
 <h2> 文章管理 </h2>
-
+<div id="mnlist">
 {% if spots %}
   <ol>
     {% for spot in spots %}
-    <li> <a href="/spot/{{ spot.id }}"> {{ spot.spot_name }} </a><span style="float:rite;"> [<a href="/user/spot/{{ spot.id }}/edit">Edit</a>] - [<a href="/user/spot/{{ spot.id }}/del">Delete</a>]</span> </li>
+    <li> <a href="/spot/{{ spot.id }}"> {{ spot.spot_name }} </a><span style="float:right;font-size:0.8em;"> [<a href="/user/spot/{{ spot.id }}/edit">Edit</a>] - [<a href="/user/spot/{{ spot.id }}/del">Delete</a>]</span> </li>
     {% endfor %}
   </ol>
+</div>
 {% else %}
   <b>暂无数据</b>
 {% endif %}

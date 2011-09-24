@@ -65,3 +65,7 @@ img {
     text-align: center;
     border-top: 1px solid #ccc;
 }
+
+#nmlist ol, li {
+    border-bottom: 1px dotted #ccc;
+}
