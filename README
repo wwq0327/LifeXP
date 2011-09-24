@@ -19,18 +19,15 @@
 =============
 数据库安始化
 ----------------------------------
-::
 
    ./manager.py createall
 
 运行
 ----------------------------------
-::
 
    ./manager.py runserver
 
 进行浏览器，输入：
-::
 
    http://127.0.0.1:8888
 
@@ -39,6 +36,7 @@
 演示站点
 ====================
 
-`http://py.wangwanqing.com <http://py.wangwanqing.com>`_
+http://py.wangwanqing.com
+
 
 
