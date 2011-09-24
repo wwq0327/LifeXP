@@ -69,7 +69,12 @@ def spot_manager():
 
 @bc.route("/spot/<int:id>/del")
 def spot_del(id):
-    pass
+    spot = Spot.query.filter_by(id=id).first()
+
+    if spot:
+        spot._delete_from_db()
+        
+    return redirect(url_for('spot_manager'))
 
 @bc.route("/spot/<int:id>/edit")
 def spot_edit(id):

@@ -9,7 +9,7 @@
 {% if spots %}
   <ol>
     {% for spot in spots %}
-    <li> <a href="/spot/{{ spot.id }}"> {{ spot.spot_name }} </a><span style="float:rite;"> [<a href="/spot/{{ spot.id }}/edit">Edit</a>] - [<a href="/spot/{{ spot.id }}/del">Delete</a>]</span> </li>
+    <li> <a href="/spot/{{ spot.id }}"> {{ spot.spot_name }} </a><span style="float:rite;"> [<a href="/user/spot/{{ spot.id }}/edit">Edit</a>] - [<a href="/user/spot/{{ spot.id }}/del">Delete</a>]</span> </li>
     {% endfor %}
   </ol>
 {% else %}
