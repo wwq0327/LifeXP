@@ -4,11 +4,18 @@
 {% if spot %}
 <b> {{ spot.spot_name }}</b>
 <ol>
-  <li> Posted On: {{ spot.posted_on }}</li>
+  <li> Posted On: {{ spot.posted_on.strftime("%Y-%m-%d, %H:%M") }}</li>
   <li> 所在地： {{ spot.spot_loc }} </li>
   <li> 理想出行季节： {{ spot.better_season }} </li>
   <li> 票价： {{ spot.tickets }} </li>
-  <li> 景点介绍： {{ spot.content }}
+  <li> 景点介绍： {{ spot.content }}</li>
+  <li> 图片介绍：</li>
+  {% if spot.imgsrc %}
+         <li> <img src="{{ spot.imgsrc }}"> </li>
+  {% else %}
+	 <li> <b>暂无图片 </b></li>
+  {% endif %}
+   
 </ol>
 {% else %}
 <b>出错啦！<b>

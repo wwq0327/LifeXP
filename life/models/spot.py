@@ -14,7 +14,7 @@
 
 from datetime import datetime
 
-from life.extensions import db
+from life.extensions import db, photos
 
 class Spot(db.Model):
     """景点数据模型"""
@@ -47,3 +47,10 @@ class Spot(db.Model):
         
         db.session.delete(self)
         db.session.commit()
+
+    @property
+    def imgsrc(self):
+        if not self.spot_logo:
+            return None
+        
+        return photos.url(self.spot_logo)

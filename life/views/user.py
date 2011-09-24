@@ -15,8 +15,9 @@
 ## :TODO: 用户管理功能
 
 from flask import Module, render_template, request, url_for, redirect, flash, abort
+from flaskext.uploads import UploadNotAllowed
 
-from life.extensions import db
+from life.extensions import db, photos
 from life.models import Spot
 from life.forms import SpotForm
 
@@ -33,13 +34,22 @@ def addspot():
     form = SpotForm(request.form)
     if request.method == 'POST' and form.validate_on_submit():
         spot_name = form.spot_name.data
+        logo = request.files.get("spot_logo")
         spot_loc = form.spot_loc.data
         better_season = form.better_season.data
         tickets = form.tickets.data
         content = form.content.data
 
+        try:
+            spot_logo = photos.save(logo)
+            #print spot_logo
+        except UploadNotAllowed:
+            flash("The upload was not allowed")
+            #print u'失败'
+
         spot = Spot(spot_name=spot_name,
                     spot_loc=spot_loc,
+                    spot_logo=spot_logo,
                     better_season=better_season,
                     tickets=tickets,
                     content=content)
