@@ -8,7 +8,7 @@
   <li> 所在地： {{ spot.spot_loc }} </li>
   <li> 理想出行季节： {{ spot.better_season }} </li>
   <li> 票价： {{ spot.tickets }} </li>
-  <li> 景点介绍： {{ spot.content }}</li>
+  <li> 景点介绍： {{ spot.content|safe }}</li>
   <li> 图片介绍：</li>
   {% if spot.imgsrc %}
          <li> <img src="{{ spot.imgsrc }}"> </li>
