@@ -89,8 +89,16 @@ def spot_edit(id):
                     tickets=spot.tickets,
                     content=spot.content)
     if request.method == 'POST' and form.validate_on_submit():
+        logo = request.files.get("spot_logo")
+
+        try:
+            spot_logo = photos.save(logo)
+        except UploadNotAllowed:
+            flash("The upload was not allowed")
+            
         Spot.query.filter_by(id=id).update({
             Spot.spot_name: request.form['spot_name'],
+            Spot.spot_logo: spot_logo,
             Spot.spot_loc: request.form['spot_loc'],
             Spot.better_season: request.form['better_season'],
             Spot.tickets: request.form['tickets'],
