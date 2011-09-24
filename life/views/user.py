@@ -76,6 +76,27 @@ def spot_del(id):
         
     return redirect(url_for('spot_manager'))
 
-@bc.route("/spot/<int:id>/edit")
+@bc.route("/spot/<int:id>/edit", methods=['GET', 'POST'])
 def spot_edit(id):
-    pass
+    spot = Spot.query.filter_by(id=id).first()
+
+    if not spot:
+        abort(404)
+
+    form = SpotForm(spot_name=spot.spot_name,
+                    spot_loc=spot.spot_loc,
+                    better_season=spot.better_season,
+                    tickets=spot.tickets,
+                    content=spot.content)
+    if request.method == 'POST' and form.validate_on_submit():
+        Spot.query.filter_by(id=id).update({
+            Spot.spot_name: request.form['spot_name'],
+            Spot.spot_loc: request.form['spot_loc'],
+            Spot.better_season: request.form['better_season'],
+            Spot.tickets: request.form['tickets'],
+            Spot.content: request.form['content']})
+        db.session.commit()
+
+        return redirect(url_for('spot_manager'))
+
+    return render_template('user/spotedit.html', form=form)
