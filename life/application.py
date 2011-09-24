@@ -22,7 +22,7 @@ from life import views
 __all__ = ['create_app']
 
 ## 默认应用程序名称
-DEFAULT_APP_NAME = "LifeXP"
+DEFAULT_APP_NAME = "life"
 
 ## 程序模块
 DEFAULT_MODULES = (

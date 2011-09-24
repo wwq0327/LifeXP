@@ -1,0 +1,50 @@
+body {
+    max-width: 1024px;
+    margin: 0 auto;
+    font-size: 12pt;
+    background-color: white;
+    color: #606060;
+    line-height: 1.25em;
+}
+
+input,
+textarea {
+    padding: 5px;
+    font-size: 16pt;
+    border: 1px solid #ddd;
+}
+
+textarea {
+    margin: 0;
+}
+
+a:link, a {
+    color: #202020;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #3366CC;
+    border-bottom: 1px dotted #3366CC;
+}
+
+h1 {
+    padding: 0 0 0.5 0;
+    font-weight: normal;
+    font-size: 2em;
+}
+
+h3 {
+    color: #000;
+}
+
+pre,
+code {
+  font-family: monospace;
+  color: #060;
+
+}
+
+img {
+    border: none;
+}

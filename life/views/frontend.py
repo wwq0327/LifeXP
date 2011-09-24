@@ -10,10 +10,11 @@
     :license: GPLv3
 """
 
-from flask import Module
+from flask import Module, render_template
 
 frontend = Module(__name__)
 
 @frontend.route("/")
 def index():
-    return "Hello, World!"
+    ## return "Hello, World!"
+    return render_template("frontend.html")
