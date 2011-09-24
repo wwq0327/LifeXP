@@ -21,3 +21,10 @@ def index():
     spots = Spot.query.order_by('-id')
     
     return render_template("frontend.html", spots=spots)
+
+@frontend.route('/spot/<int:id>')
+def spot_one(id):
+    spot = Spot.query.filter_by(id=id).first()
+
+    return render_template('spot.html', spot=spot)
+        

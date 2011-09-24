@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if spot %}
+<b> {{ spot.spot_name }}
+<ol>
+  <li> Posted On: {{ spot.posted_on }}</li>
+  <li> 所在地： {{ spot.spot_loc }} </li>
+  <li> 理想出行季节： {{ spot.better_season }} </li>
+  <li> 票价： {{ spot.tickets }} </li>
+  <li> 景点介绍： {{ spot.content }}
+</ol>
+{% else %}
+<b>出错啦！<b>
+{% endif %}
+{% endblock %}
