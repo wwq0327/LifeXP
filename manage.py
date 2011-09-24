@@ -14,13 +14,17 @@
 
 from flask import current_app
 
-from flaskext.script import Manager
+from flaskext.script import Manager, Server
 
 from life import create_app
 from life.extensions import db
 from life.models import Spot
 
 manager = Manager(create_app)
+
+server = Server(host='127.0.0.1', port=8888)
+manager.add_command("runserver", server)
+
 
 @manager.command
 def createall():
