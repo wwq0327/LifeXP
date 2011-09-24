@@ -5,10 +5,12 @@
 {% include "user/_nv.html" %}
 
 <h2> 添加新景点 </h2>
-<form action="" method="post">
+<form action="" method="post" enctype=multipart/form-data>
 {{ form.csrf }}
 <dt> {{ form.spot_name.label }}:
 <dt> {{ form.spot_name }}
+<dt> {{ form.spot_logo.label }}:
+<dt> {{ form.spot_logo }}
 <dt> {{ form.spot_loc.label }}:
 <dt> {{ form.spot_loc }}
 <dt> {{ form.better_season.label }}:

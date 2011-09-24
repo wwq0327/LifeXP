@@ -12,7 +12,7 @@
     :license: GPLv3
 """
 
-from flaskext.wtf import Form, TextField, TextAreaField, SubmitField, required, FloatField
+from flaskext.wtf import Form, TextField, TextAreaField, SubmitField, required, FloatField, FileField
 
 class SpotForm(Form):
 
@@ -21,5 +21,5 @@ class SpotForm(Form):
     better_season = TextField(u"理想出行季节")
     tickets = FloatField(u"票价")
     content = TextAreaField(u"景点介绍")
-    spot_logo = TextField(u"图片")
+    spot_logo = FileField(u"图片")
     submit = SubmitField(u"发布景点")
