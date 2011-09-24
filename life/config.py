@@ -29,6 +29,7 @@ MN_PER_PAGE = 10 # 后台管理中每页文章列表数
 
 class Config(object):
     SECRET_KEY = 'B\xa2\xc3ru\xcd\xac\x039\x836\x93S\x0f2_\x9b\x9d>S\xb91\xb2\xfa'
+    UPLOADED_PHOTOS_DEST = '/tmp/lifephoto'
     DEBUG = False
     TESTING = False
     SQLALCHEMY_DATABASE_URI = 'sqlite:///%s' % _DB_SQLITE_PATH

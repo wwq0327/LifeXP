@@ -13,7 +13,9 @@
 """
 
 from flaskext.sqlalchemy import SQLAlchemy
+from flaskext.uploads import UploadSet, IMAGES
 
-__all__ = ['db']
+__all__ = ['db', 'photos']
 
 db = SQLAlchemy()
+photos = UploadSet('photos', IMAGES)

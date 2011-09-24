@@ -13,9 +13,10 @@
 """
 
 from flask import Flask, render_template
+from flaskext.uploads import configure_uploads
 
 from life.config import Config, DevConfig, ProConfig
-from life.extensions import db
+from life.extensions import db, photos
 
 from life import views
 
@@ -45,6 +46,7 @@ def create_app(config=None, app_name=None, modules=None):
     configure_extensions(app)
     configure_errorhandler(app)
     configure_modules(app, modules)
+    configure_uploads(app, photos)
 
     return app
 
