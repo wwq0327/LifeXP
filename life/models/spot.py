@@ -50,6 +50,8 @@ class Spot(db.Model):
 
     @property
     def imgsrc(self):
+        """获取图片路径"""
+        
         if not self.spot_logo:
             return None
         

@@ -17,5 +17,5 @@ from flaskext.uploads import UploadSet, IMAGES
 
 __all__ = ['db', 'photos']
 
-db = SQLAlchemy()
-photos = UploadSet('photos', IMAGES)
+db = SQLAlchemy()  ## 数据库
+photos = UploadSet('photos', IMAGES) ## 图片上传扩展

@@ -46,7 +46,7 @@ def create_app(config=None, app_name=None, modules=None):
     configure_extensions(app)
     configure_errorhandler(app)
     configure_modules(app, modules)
-    configure_uploads(app, photos)
+    configure_uploads(app, photos)  ## 图片上传配置
 
     return app
 

@@ -41,11 +41,9 @@ def addspot():
         content = form.content.data
 
         try:
-            spot_logo = photos.save(logo)
-            #print spot_logo
+            spot_logo = photos.save(logo)  ## 保存图片
         except UploadNotAllowed:
             flash("The upload was not allowed")
-            #print u'失败'
 
         spot = Spot(spot_name=spot_name,
                     spot_loc=spot_loc,
