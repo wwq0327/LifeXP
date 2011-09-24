@@ -1,0 +1,1 @@
+Search.setIndex({objects:{},terms:{index:0,search:0,welcom:0,lifexp:0,modul:0,"\u5b89\u88c5\u4e0e\u8fd0\u884c":[0,2],indic:0,content:0,tabl:0,document:0,page:0},objtypes:{},titles:["Welcome to lifexp&#8217;s documentation!","\u6982\u8ff0","\u5b89\u88c5\u4e0e\u8fd0\u884c"],objnames:{},filenames:["index","_src/intro","_src/install"]})
