@@ -21,7 +21,7 @@ from life import views
 
 __all__ = ['create_app']
 
-## 默认应用程序名称
+## 默认应用程序名称, 与二级目录名称一致
 DEFAULT_APP_NAME = "life"
 
 ## 程序模块
@@ -30,6 +30,8 @@ DEFAULT_MODULES = (
     )
 
 def create_app(config=None, app_name=None, modules=None):
+    """创建应用配置"""
+    
     if app_name is None:
         app_name = DEFAULT_APP_NAME
 
@@ -45,6 +47,8 @@ def create_app(config=None, app_name=None, modules=None):
     return app
 
 def configure_app(app, config):
+    """调用运行环境配置"""
+    
     app.config.from_object(DevConfig())
 
     if config is not None:
@@ -53,8 +57,12 @@ def configure_app(app, config):
     app.config.from_envvar("APP_CONFIG", silent=True)
 
 def configure_modules(app, modules):
+    """配置网站相关模块"""
+    
     for module, url_prefix in modules:
         app.register_module(module, url_prefix=url_prefix)
 
 def configure_extensions(app):
+    """配置各类扩展"""
+    
     db.init_app(app)
