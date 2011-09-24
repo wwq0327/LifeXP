@@ -60,3 +60,17 @@ def addspot():
         return redirect(url_for("index"))
             
     return render_template("user/addspot.html", form=form)
+
+@bc.route("/spotmanager")
+def spot_manager():
+    spots = Spot.query.order_by('-id')
+
+    return render_template("user/spotmn.html", spots=spots)
+
+@bc.route("/spot/<int:id>/del")
+def spot_del(id):
+    pass
+
+@bc.route("/spot/<int:id>/edit")
+def spot_edit(id):
+    pass
