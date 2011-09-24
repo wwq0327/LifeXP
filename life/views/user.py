@@ -28,8 +28,27 @@ bc = Module(__name__)
 def index():
     return render_template("user/index.html")
 
-@bc.route("/addspot")
+@bc.route("/addspot", methods=['GET', 'POST'])
 def addspot():
     form = SpotForm(request.form)
-    
+    if request.method == 'POST' and form.validate_on_submit():
+        spot_name = form.spot_name.data
+        spot_loc = form.spot_loc.data
+        better_season = form.better_season.data
+        tickets = form.tickets.data
+        content = form.content.data
+
+        spot = Spot(spot_name=spot_name,
+                    spot_loc=spot_loc,
+                    better_season=better_season,
+                    tickets=tickets,
+                    content=content)
+        try:
+            spot._store_to_db()
+            flash(u"数据保存成功!")
+        except:
+            flash(u"保存失败")
+
+        return redirect(url_for("index"))
+            
     return render_template("user/addspot.html", form=form)
