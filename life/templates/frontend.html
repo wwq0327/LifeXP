@@ -1,4 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Welcome to LifeXP Page!</h1>
+<h3>景点列表</h3>
+{% if not spots %}
+  <b>暂无数据记录</b>
+{% else %}
+  <ol>
+  {% for spot in spots %}
+    <li><a href="/spot/{{ spot.id }}">{{ spot.spot_name }}</a></li>
+  {% endfor %}
+  </ol>
+{% endif %}
+      
 {% endblock %}
