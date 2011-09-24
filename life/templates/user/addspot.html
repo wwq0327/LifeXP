@@ -4,5 +4,20 @@
 <!-- 用户后台控制导航 -->
 {% include "user/_nv.html" %}
 
-user ctrl  // addpost.html
+<h2> 添加新景点 </h2>
+<form action="" method="post">
+{{ form.csrf }}
+<dt> {{ form.spot_name.label }}:
+<dt> {{ form.spot_name }}
+<dt> {{ form.spot_loc.label }}:
+<dt> {{ form.spot_loc }}
+<dt> {{ form.better_season.label }}:
+<dt> {{ form.better_season }}
+<dt> {{ form.tickets.label }}:
+<dt> {{ form.tickets }}
+<dt> {{ form.content.label }}:
+<dt> {{ form.content(style="width:100%; height:300px;") }}
+<dt> {{ form.submit }}
+</form>
+
 {% endblock %}

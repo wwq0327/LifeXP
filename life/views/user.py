@@ -18,6 +18,7 @@ from flask import Module, render_template, request, url_for, redirect, flash, ab
 
 from life.extensions import db
 from life.models import Spot
+from life.forms import SpotForm
 
 ## 用户后台管理视图
 bc = Module(__name__)
@@ -29,4 +30,6 @@ def index():
 
 @bc.route("/addspot")
 def addspot():
-    return render_template("user/addspot.html")
+    form = SpotForm(request.form)
+    
+    return render_template("user/addspot.html", form=form)
