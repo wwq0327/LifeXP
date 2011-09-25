@@ -14,7 +14,7 @@
 
 ## :TODO: 用户管理功能
 
-from flask import Module, render_template, request, url_for, redirect, flash, abort
+from flask import Blueprint, Module, render_template, request, url_for, redirect, flash, abort
 from flaskext.uploads import UploadNotAllowed
 from flaskext.login import login_required  ## 用户登录认证
 
@@ -23,15 +23,16 @@ from life.models import Spot
 from life.forms import SpotForm
 
 ## 用户后台管理视图
-bc = Module(__name__)
+#user = Module(__name__)
+user = Blueprint('user', __name__, url_prefix='/user')
 
-@bc.route("/")
-@bc.route("/index")
+@user.route("/")
+@user.route("/index")
 @login_required
 def index():
     return render_template("user/index.html")
 
-@bc.route("/addspot", methods=['GET', 'POST'])
+@user.route("/addspot", methods=['GET', 'POST'])
 @login_required
 def addspot():
     form = SpotForm(request.form)
@@ -64,14 +65,14 @@ def addspot():
             
     return render_template("user/addspot.html", form=form)
 
-@bc.route("/spotmanager")
+@user.route("/spotmanager")
 @login_required
 def spot_manager():
     spots = Spot.query.order_by('-id')
 
     return render_template("user/spotmn.html", spots=spots)
 
-@bc.route("/spot/<int:id>/del")
+@user.route("/spot/<int:id>/del")
 @login_required
 def spot_del(id):
     spot = Spot.query.filter_by(id=id).first()
@@ -81,7 +82,7 @@ def spot_del(id):
         
     return redirect(url_for('spot_manager'))
 
-@bc.route("/spot/<int:id>/edit", methods=['GET', 'POST'])
+@user.route("/spot/<int:id>/edit", methods=['GET', 'POST'])
 @login_required
 def spot_edit(id):
     spot = Spot.query.filter_by(id=id).first()

@@ -16,10 +16,12 @@ from flask import Flask, render_template
 from flaskext.uploads import configure_uploads
 
 from life.config import Config, DevConfig, ProConfig
-from life.extensions import db, photos
+from life.extensions import db, photos, login_manager
 
 from life import views
-from life.views import login_manager
+#from life.views import login_manager
+from life.models import Anonymous
+from life.views import frontend, user, account
 
 __all__ = ['create_app']
 
@@ -27,27 +29,38 @@ __all__ = ['create_app']
 DEFAULT_APP_NAME = "life"
 
 ## 程序模块
-DEFAULT_MODULES = (
-    (views.frontend, ""),
-    (views.bc, "/user"),
-    (views.account, "/accounts"),
+## DEFAULT_MODULES = (
+##     (views.frontend, ""),
+##     (views.user, "/user"),
+##     (views.account, "/account"),
+##     )
+
+DEFAULT_BLUEPRINTS = (
+    frontend,
+    user,
+    account,
     )
 
-def create_app(config=None, app_name=None, modules=None):
+def create_app(config=None, app_name=None, blueprints=None):
     """创建应用配置"""
     
     if app_name is None:
         app_name = DEFAULT_APP_NAME
 
-    if modules is None:
-        modules = DEFAULT_MODULES
+    ## if modules is None:
+    ##     modules = DEFAULT_MODULES
+
+    if blueprints is None:
+        blueprints = DEFAULT_BLUEPRINTS
         
     app = Flask(app_name)
 
     configure_app(app, config)
-    configure_modules(app, modules)
+    ## configure_modules(app, modules)
+    configure_blueprints(app, blueprints)
     configure_extensions(app)
     configure_login(app)
+
     configure_errorhandler(app)
     configure_uploads(app, photos)  ## 图片上传配置
 
@@ -63,18 +76,26 @@ def configure_app(app, config):
 
     app.config.from_envvar("APP_CONFIG", silent=True)
 
-def configure_modules(app, modules):
-    """配置网站相关模块"""
+## def configure_modules(app, modules):
+##     """配置网站相关模块"""
     
-    for module, url_prefix in modules:
-        app.register_module(module, url_prefix=url_prefix)
+##     for module, url_prefix in modules:
+##         app.register_module(module, url_prefix=url_prefix)
 
+def configure_blueprints(app, blueprints):
+    for blueprint in blueprints:
+        app.register_blueprint(blueprint)
+        
 def configure_extensions(app):
     """配置各类扩展"""
     
     db.init_app(app)
 
 def configure_login(app):
+    login_manager.anonymouse = Anonymous
+    login_manager.login_view = 'account.login'
+    #login_manager.login_message = u"请你登录"
+    
     login_manager.setup_app(app)
     
 def configure_errorhandler(app):

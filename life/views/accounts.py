@@ -10,22 +10,24 @@
     :license: GPLv3
 """
 
-from flask import Module, request, render_template, redirect, url_for, flash
+from flask import Blueprint, Module, request, render_template, redirect, url_for, flash
 
-from flaskext.login import (LoginManager, current_user, login_required, login_user,
+from flaskext.login import (current_user, login_required, login_user,
                           logout_user, UserMixin, AnonymousUser, confirm_login,
                           fresh_login_required)
 
 from life.models import Anonymous, User, LoginUser
 from life.forms import LoginForm
-from life.views import bc
+from life.views import user
+from life.extensions import login_manager
 
-account = Module(__name__)
+#account = Module(__name__)
+account = Blueprint('accounts', __name__, url_prefix='/accounts')
 
-login_manager = LoginManager()
-login_manager.anonymous_user = Anonymous
-login_manager.login_view = 'account.login'
-login_manager.login_message = u'你需要登录后才能进行下一步操作'
+## login_manager = LoginManager()
+## login_manager.anonymous_user = Anonymous
+## login_manager.login_view = 'account.login'
+## login_manager.login_message = u'你需要登录后才能进行下一步操作'
 
 @login_manager.user_loader
 def load_user(id):
@@ -50,8 +52,7 @@ def login():
                 if login_user(loginuser, remember=remember):
                     #flash(u"登录成功")
                     #return redirect(request.args.get('next') or "/user/index")
-                    return redirect(request.args.get('next') or url_for("bc.index"))
-                    #return redirect(url_for("life.views.bc.index"))
+                    return redirect(request.args.get('next') or url_for("user.index"))
                 ## else:
                 ##     flash(u"登录失败")
             else:

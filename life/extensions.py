@@ -14,8 +14,10 @@
 
 from flaskext.sqlalchemy import SQLAlchemy
 from flaskext.uploads import UploadSet, IMAGES
+from flaskext.login import LoginManager
 
 __all__ = ['db', 'photos']
 
 db = SQLAlchemy()  ## 数据库
 photos = UploadSet('photos', IMAGES) ## 图片上传扩展
+login_manager = LoginManager()

@@ -11,5 +11,5 @@
 """
 
 from life.views.frontend import frontend
-from life.views.user import bc
+from life.views.user import user
 from life.views.accounts import account, login_manager

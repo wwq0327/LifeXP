@@ -10,11 +10,12 @@
     :license: GPLv3
 """
 
-from flask import Module, render_template
+from flask import Blueprint, Module, render_template
 
 from life.models import Spot
 
-frontend = Module(__name__)
+#frontend = Module(__name__)
+frontend  = Blueprint('frontend', __name__)
 
 @frontend.route("/")
 def index():
