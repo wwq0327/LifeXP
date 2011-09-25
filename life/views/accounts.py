@@ -65,4 +65,4 @@ def login():
 def logout():
     logout_user()
     flash(u"你已退出后台管理界面，如需进行设置请登录")
-    return redirect(url_for('accounts.login'))
+    return redirect(url_for('frontend.index'))
