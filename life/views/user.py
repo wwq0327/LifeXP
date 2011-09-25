@@ -80,7 +80,7 @@ def spot_del(id):
     if spot:
         spot._delete_from_db()
         
-    return redirect(url_for('spot_manager'))
+    return redirect(url_for('user.spot_manager'))
 
 @user.route("/spot/<int:id>/edit", methods=['GET', 'POST'])
 @login_required
