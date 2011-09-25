@@ -29,8 +29,8 @@ DEFAULT_APP_NAME = "life"
 ## 程序模块
 DEFAULT_MODULES = (
     (views.frontend, ""),
-    (views.bc, '/user'),
-    (views.account, '/accounts'),
+    (views.bc, "/user"),
+    (views.account, "/accounts"),
     )
 
 def create_app(config=None, app_name=None, modules=None):
@@ -45,10 +45,10 @@ def create_app(config=None, app_name=None, modules=None):
     app = Flask(app_name)
 
     configure_app(app, config)
+    configure_modules(app, modules)
     configure_extensions(app)
     configure_login(app)
     configure_errorhandler(app)
-    configure_modules(app, modules)
     configure_uploads(app, photos)  ## 图片上传配置
 
     return app

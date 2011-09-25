@@ -26,7 +26,6 @@ login_manager = LoginManager()
 login_manager.anonymous_user = Anonymous
 login_manager.login_view = 'account.login'
 login_manager.login_message = u'你需要登录后才能进行下一步操作'
-## login_manager.refresh_view = 'fblog.views.account.reauth'
 
 @login_manager.user_loader
 def load_user(id):
@@ -50,7 +49,8 @@ def login():
                 loginuser = LoginUser(user.id, user.username)
                 if login_user(loginuser, remember=remember):
                     #flash(u"登录成功")
-                    return redirect(request.args.get('next') or "/user/index")
+                    #return redirect(request.args.get('next') or "/user/index")
+                    return redirect(request.args.get('next') or url_for("bc.index"))
                     #return redirect(url_for("life.views.bc.index"))
                 ## else:
                 ##     flash(u"登录失败")
@@ -64,4 +64,4 @@ def login():
 def logout():
     logout_user()
     flash(u"你已退出后台管理界面，如需进行设置请登录")
-    return redirect(url_for('account.login'))
+    return redirect(url_for('login'))

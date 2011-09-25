@@ -16,6 +16,7 @@
 
 from flask import Module, render_template, request, url_for, redirect, flash, abort
 from flaskext.uploads import UploadNotAllowed
+from flaskext.login import login_required  ## 用户登录认证
 
 from life.extensions import db, photos
 from life.models import Spot
@@ -26,10 +27,12 @@ bc = Module(__name__)
 
 @bc.route("/")
 @bc.route("/index")
+@login_required
 def index():
     return render_template("user/index.html")
 
 @bc.route("/addspot", methods=['GET', 'POST'])
+@login_required
 def addspot():
     form = SpotForm(request.form)
     if request.method == 'POST' and form.validate_on_submit():
@@ -62,12 +65,14 @@ def addspot():
     return render_template("user/addspot.html", form=form)
 
 @bc.route("/spotmanager")
+@login_required
 def spot_manager():
     spots = Spot.query.order_by('-id')
 
     return render_template("user/spotmn.html", spots=spots)
 
 @bc.route("/spot/<int:id>/del")
+@login_required
 def spot_del(id):
     spot = Spot.query.filter_by(id=id).first()
 
@@ -77,6 +82,7 @@ def spot_del(id):
     return redirect(url_for('spot_manager'))
 
 @bc.route("/spot/<int:id>/edit", methods=['GET', 'POST'])
+@login_required
 def spot_edit(id):
     spot = Spot.query.filter_by(id=id).first()
 
