@@ -21,7 +21,7 @@ from life.extensions import db, photos, login_manager
 from life import views
 #from life.views import login_manager
 from life.models import Anonymous
-from life.views import frontend, user, account
+from life.views import frontend, user, accounts
 
 __all__ = ['create_app']
 
@@ -36,9 +36,9 @@ DEFAULT_APP_NAME = "life"
 ##     )
 
 DEFAULT_BLUEPRINTS = (
-    frontend,
-    user,
-    account,
+    (frontend, ''),
+    (user, '/user'),
+    (accounts, '/accounts'),
     )
 
 def create_app(config=None, app_name=None, blueprints=None):
@@ -83,8 +83,8 @@ def configure_app(app, config):
 ##         app.register_module(module, url_prefix=url_prefix)
 
 def configure_blueprints(app, blueprints):
-    for blueprint in blueprints:
-        app.register_blueprint(blueprint)
+    for blueprint, url_prefix in blueprints:
+        app.register_blueprint(blueprint, url_prefix=url_prefix)
         
 def configure_extensions(app):
     """配置各类扩展"""
@@ -93,7 +93,7 @@ def configure_extensions(app):
 
 def configure_login(app):
     login_manager.anonymouse = Anonymous
-    login_manager.login_view = 'account.login'
+    login_manager.login_view = 'accounts.login'
     #login_manager.login_message = u"请你登录"
     
     login_manager.setup_app(app)

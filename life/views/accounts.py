@@ -22,11 +22,11 @@ from life.views import user
 from life.extensions import login_manager
 
 #account = Module(__name__)
-account = Blueprint('accounts', __name__, url_prefix='/accounts')
+accounts = Blueprint('accounts', __name__)
 
 ## login_manager = LoginManager()
 ## login_manager.anonymous_user = Anonymous
-## login_manager.login_view = 'account.login'
+## login_manager.login_view = 'accounts.login'
 ## login_manager.login_message = u'你需要登录后才能进行下一步操作'
 
 @login_manager.user_loader
@@ -36,7 +36,7 @@ def load_user(id):
     except:
         return None
 
-@account.route('/login', methods=['GET', 'POST'])
+@accounts.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm(request.form)
 
@@ -60,9 +60,9 @@ def login():
 
     return render_template("user/login.html", form=form)
 
-@account.route('/logout')
+@accounts.route('/logout')
 @login_required
 def logout():
     logout_user()
     flash(u"你已退出后台管理界面，如需进行设置请登录")
-    return redirect(url_for('login'))
+    return redirect(url_for('accounts.login'))

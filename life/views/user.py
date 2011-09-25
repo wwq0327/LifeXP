@@ -24,7 +24,7 @@ from life.forms import SpotForm
 
 ## 用户后台管理视图
 #user = Module(__name__)
-user = Blueprint('user', __name__, url_prefix='/user')
+user = Blueprint('user', __name__)
 
 @user.route("/")
 @user.route("/index")

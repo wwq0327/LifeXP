@@ -12,4 +12,4 @@
 
 from life.views.frontend import frontend
 from life.views.user import user
-from life.views.accounts import account, login_manager
+from life.views.accounts import accounts, login_manager
