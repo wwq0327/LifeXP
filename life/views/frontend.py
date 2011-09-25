@@ -29,3 +29,6 @@ def spot_one(id):
 
     return render_template('spot.html', spot=spot)
         
+@frontend.route('/help')
+def help():
+    return render_template('help.html')
