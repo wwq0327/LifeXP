@@ -18,7 +18,7 @@ from flaskext.login import (LoginManager, current_user, login_required, login_us
 
 from life.models import Anonymous, User, LoginUser
 from life.forms import LoginForm
-from life.views import admin
+from life.views import bc
 
 account = Module(__name__)
 
@@ -50,22 +50,13 @@ def login():
                 loginuser = LoginUser(user.id, user.username)
                 if login_user(loginuser, remember=remember):
                     #flash(u"登录成功")
-                    return redirect(request.args.get('next') or url_for("admin.index"))
+                    return redirect(request.args.get('next') or url_for("bc.index"))
                 ## else:
                 ##     flash(u"登录失败")
             else:
                 flash(u"用户名不存在，或与密码不匹配")
 
-    return render_template("admin/login.html", form=form)
-
-## @account.route('/reauth', methods=['GET', 'POST'])
-## @login_required
-## def reauth():
-##     if request.method == 'POST':
-##         confirm_login()
-##         flash(u"用户认证")
-##         return redirect(request.args.get('next') or url_for('blog.index'))
-##     return render_template('admin/reauth.html')
+    return render_template("user/login.html", form=form)
 
 @account.route('/logout')
 @login_required
