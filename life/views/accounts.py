@@ -50,7 +50,8 @@ def login():
                 loginuser = LoginUser(user.id, user.username)
                 if login_user(loginuser, remember=remember):
                     #flash(u"登录成功")
-                    return redirect(request.args.get('next') or url_for("bc.index"))
+                    return redirect(request.args.get('next') or "/user/index")
+                    #return redirect(url_for("life.views.bc.index"))
                 ## else:
                 ##     flash(u"登录失败")
             else:
