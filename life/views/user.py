@@ -61,7 +61,7 @@ def addspot():
         except:
             flash(u"保存失败")
 
-        return redirect(url_for("index"))
+        return redirect(url_for("user.index"))
             
     return render_template("user/addspot.html", form=form)
 
@@ -112,6 +112,6 @@ def spot_edit(id):
             Spot.content: request.form['content']})
         db.session.commit()
 
-        return redirect(url_for('spot_manager'))
+        return redirect(url_for('user.spot_manager'))
 
     return render_template('user/spotedit.html', form=form)
