@@ -19,6 +19,7 @@ from life.config import Config, DevConfig, ProConfig
 from life.extensions import db, photos
 
 from life import views
+from life.views import login_manager
 
 __all__ = ['create_app']
 
@@ -45,6 +46,7 @@ def create_app(config=None, app_name=None, modules=None):
 
     configure_app(app, config)
     configure_extensions(app)
+    configure_login(app)
     configure_errorhandler(app)
     configure_modules(app, modules)
     configure_uploads(app, photos)  ## 图片上传配置
@@ -72,6 +74,9 @@ def configure_extensions(app):
     
     db.init_app(app)
 
+def configure_login(app):
+    login_manager.setup_app(app)
+    
 def configure_errorhandler(app):
     """各种错误"""
 
