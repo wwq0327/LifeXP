@@ -11,3 +11,4 @@
 """
 
 from life.models.spot import Spot
+from life.models.accounts import User, Anonymous, LoginUser

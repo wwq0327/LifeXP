@@ -11,3 +11,4 @@
 """
 
 from life.forms.spotform import SpotForm
+from life.forms.accounts import LoginForm

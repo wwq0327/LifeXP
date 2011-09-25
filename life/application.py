@@ -29,6 +29,7 @@ DEFAULT_APP_NAME = "life"
 DEFAULT_MODULES = (
     (views.frontend, ""),
     (views.bc, '/user'),
+    (views.account, '/accounts'),
     )
 
 def create_app(config=None, app_name=None, modules=None):

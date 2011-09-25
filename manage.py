@@ -18,7 +18,7 @@ from flaskext.script import Manager, Server
 
 from life import create_app
 from life.extensions import db
-from life.models import Spot
+from life.models import Spot, User
 
 manager = Manager(create_app)
 
@@ -38,7 +38,8 @@ def dropall():
 def make_shell_context():
     return dict(app=create_app,
                 db=db,
-                Spot=Spot)
+                Spot=Spot,
+                User=User)
 
 if __name__ == '__main__':
     manager.run()
