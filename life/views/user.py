@@ -165,6 +165,11 @@ def wantto(id):
 
 @user.route("/wb")
 def manager_been_want():
+
+    """TODO
+    ~~~~~~~~~~~~~~
+    根据用户ID，得到Spot_id，检索出相关景点标题，这是一个列表，暂时不知道如何处理。
+    """
     
     usernmae = current_user.name
     wb = Concern.query.filter_by(username=username).all()
