@@ -167,7 +167,7 @@ def wantto(id):
 def manager_been_want():
     
     usernmae = current_user.name
-    wb = Concern.query.filter_by(username=username).first()
+    wb = Concern.query.filter_by(username=username).all()
 
     spots = Spot.query(id=wb.spot_id).all()
 
