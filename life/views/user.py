@@ -14,7 +14,7 @@
 
 ## :TODO: 用户管理功能
 
-from flask import Blueprint, Module, render_template, request, url_for, redirect, flash, abort
+from flask import Blueprint, Module, render_template, request, url_for, redirect, flash, abort, g
 from flaskext.uploads import UploadNotAllowed
 from flaskext.login import login_required, current_user  ## 用户登录认证
 
@@ -32,7 +32,7 @@ user = Blueprint('user', __name__)
 def index():
     return render_template("user/index.html")
 
-@property
+#@property
 def get_user_id(username):
     """获得用户ID"""
     user = User.query.filter_by(username=username).first()
@@ -126,10 +126,42 @@ def spot_edit(id):
 
     return render_template('user/spotedit.html', form=form)
 
-@user.route("/beento")
-def beento():
-    pass
+@user.route("/<int:id>/beento")
+def beento(id):
+    user_id = get_user_id(current_user)
 
-@user.route("/wantto")
-def wantto():
-    pass
+    if user_id or id is None:
+        abort(404)
+
+    con = Concern(user_id=user_id,
+                  spot_id = id,
+                  beento = True)
+    try:
+        con._store_to_db()
+        flash(u"你又多了一个去过的地主！")
+    except:
+        pass
+
+    return redirect(url_for('frontend.spot_one', id=id))
+
+@user.route("/<int:id>/wantto")
+def wantto(id):
+
+    print current_user
+    user_id = get_user_id(current_user)
+
+    ##user_id = get_user_id(g.username)
+    if user_id or id is None:
+        abort(404)
+
+    con = Concern(user_id=user_id,
+                  spot_id=id,
+                  wantto=True)
+
+    try:
+        con._store_to_db()
+        flash(u"又一个你想去的地方")
+    except:
+        pass
+
+    return redirect(url_for('frontend.spot_one', id=id))
