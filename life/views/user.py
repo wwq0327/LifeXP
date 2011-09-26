@@ -162,3 +162,14 @@ def wantto(id):
         pass
 
     return redirect(url_for('frontend.spot_one', id=id))
+
+@user.route("/wb")
+def manager_been_want():
+    
+    usernmae = current_user.name
+    wb = Concern.query.filter_by(username=username).first()
+
+    spots = Spot.query(id=wb.spot_id).all()
+
+    return render_template('user/wb.html', spots=spots)
+    

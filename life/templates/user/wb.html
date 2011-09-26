@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if not spots %}
+  <b> 暂时没有数据 </b>
+{% else %}
+  {% for spot in spots %}
+   <ol>
+     <li> {{ spot.spot_name }}</li>
+  </ol>
+  {% endfor %}
+{% endif %}
+{% endblock %}
