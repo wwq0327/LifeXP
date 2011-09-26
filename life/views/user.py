@@ -16,10 +16,10 @@
 
 from flask import Blueprint, Module, render_template, request, url_for, redirect, flash, abort
 from flaskext.uploads import UploadNotAllowed
-from flaskext.login import login_required  ## 用户登录认证
+from flaskext.login import login_required, current_user  ## 用户登录认证
 
 from life.extensions import db, photos
-from life.models import Spot
+from life.models import Spot, Concern, User
 from life.forms import SpotForm
 
 ## 用户后台管理视图
@@ -31,6 +31,16 @@ user = Blueprint('user', __name__)
 @login_required
 def index():
     return render_template("user/index.html")
+
+@property
+def get_user_id(username):
+    """获得用户ID"""
+    user = User.query.filter_by(username=username).first()
+
+    if user is None:
+        abort(404)
+        
+    return user.id
 
 @user.route("/addspot", methods=['GET', 'POST'])
 @login_required
