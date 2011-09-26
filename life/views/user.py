@@ -23,7 +23,6 @@ from life.models import Spot, Concern, User
 from life.forms import SpotForm
 
 ## 用户后台管理视图
-#user = Module(__name__)
 user = Blueprint('user', __name__)
 
 @user.route("/")
@@ -32,7 +31,6 @@ user = Blueprint('user', __name__)
 def index():
     return render_template("user/index.html")
 
-#@property
 def get_user_id(username):
     """获得用户ID"""
     user = User.query.filter_by(username=username).first()
@@ -128,7 +126,9 @@ def spot_edit(id):
 
 @user.route("/<int:id>/beento")
 def beento(id):
-    user_id = get_user_id(current_user)
+    if not current_user.is_authenticated():
+        return redirect(url_for("accounts.login"))
+    user_id = get_user_id(current_user.name)
 
     if user_id or id is None:
         abort(404)
@@ -147,8 +147,10 @@ def beento(id):
 @user.route("/<int:id>/wantto")
 def wantto(id):
 
-    print current_user
-    user_id = get_user_id(current_user)
+    if not current_user.is_authenticated():
+        return redirect(url_for("accounts.login"))
+    
+    user_id = get_user_id(current_user.name)
 
     ##user_id = get_user_id(g.username)
     if user_id or id is None:
