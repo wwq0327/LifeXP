@@ -115,3 +115,11 @@ def spot_edit(id):
         return redirect(url_for('user.spot_manager'))
 
     return render_template('user/spotedit.html', form=form)
+
+@user.route("/beento")
+def beento():
+    pass
+
+@user.route("/wantto")
+def wantto():
+    pass

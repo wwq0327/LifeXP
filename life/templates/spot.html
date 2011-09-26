@@ -4,7 +4,7 @@
 {% if spot %}
 <b> {{ spot.spot_name }}</b>
 <ol>
-  <li> Posted On: {{ spot.posted_on.strftime("%Y-%m-%d, %H:%M") }}</li>
+  <li> Posted On: {{ spot.posted_on.strftime("%Y-%m-%d, %H:%M") }} - { <a href="{{ url_for('user.wantto') }}">想去</a> }-{ <a href="{{ url_for('user.beento') }}">去过</a> }</li>
   <li> 所在地： {{ spot.spot_loc }} </li>
   <li> 理想出行季节： {{ spot.better_season }} </li>
   <li> 票价： {{ spot.tickets }} </li>
