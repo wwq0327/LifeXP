@@ -170,12 +170,26 @@ def manager_been_want():
     ~~~~~~~~~~~~~~
     根据用户ID，得到Spot_id，检索出相关景点标题，这是一个列表，暂时不知道如何处理。
     """
+
+    spots = []
+    wts = []
     
-    usernmae = current_user.name
+    username = current_user.name
     user_id = get_user_id(username)
-    wb = Concern.query.filter_by(user_id=user_id).all()
+    wb = Concern.query.filter_by(user_id=user_id).all() ## 获得Concern中 某用户的所有数据条
 
-    spots = Spot.query(id=wb.spot_id).all()
+    for w in wb:
+        if w.beento == False:
+            continue
+        spot = Spot.query.filter_by(id=w.spot_id).first()
 
-    return render_template('user/wb.html', spots=spots)
+        spots.append([spot.id, spot.spot_name])
+
+    for w in wb:
+        if w.wantto == False:
+            continue
+        wt = Spot.query.filter_by(id=w.spot_id).first()
+        wts.append([wt.id, wt.spot_name])
+        
+    return render_template('user/wb.html', spots=spots, wts=wts)
     
