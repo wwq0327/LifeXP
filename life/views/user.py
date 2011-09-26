@@ -36,6 +36,7 @@ def get_user_id(username):
     user = User.query.filter_by(username=username).first()
 
     if user is None:
+        #print 'not found!'
         abort(404)
         
     return user.id
@@ -128,10 +129,8 @@ def spot_edit(id):
 def beento(id):
     if not current_user.is_authenticated():
         return redirect(url_for("accounts.login"))
+    print current_user.name
     user_id = get_user_id(current_user.name)
-
-    if user_id or id is None:
-        abort(404)
 
     con = Concern(user_id=user_id,
                   spot_id = id,
@@ -151,10 +150,6 @@ def wantto(id):
         return redirect(url_for("accounts.login"))
     
     user_id = get_user_id(current_user.name)
-
-    ##user_id = get_user_id(g.username)
-    if user_id or id is None:
-        abort(404)
 
     con = Concern(user_id=user_id,
                   spot_id=id,
