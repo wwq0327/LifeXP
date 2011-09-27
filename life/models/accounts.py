@@ -64,10 +64,10 @@ class Beento(db.Model):
     ##wantto = db.Column(db.Boolean())
 
     def __init__(self, *args, **kwargs):
-        super(Concern, self).__init__(*args, **kwargs)
+        super(Beento, self).__init__(*args, **kwargs)
 
     def _repr__(self):
-        return "<Concern %s>" % self.user_id
+        return "<Beento %s>" % self.user_id
 
     def _store_to_db(self):
         db.session.add(self)
@@ -83,10 +83,10 @@ class Wantto(db.Model):
     wantto = db.Column(db.Boolean())
 
     def __init__(self, *args, **kwargs):
-        super(Concern, self).__init__(*args, **kwargs)
+        super(Wantto, self).__init__(*args, **kwargs)
 
     def _repr__(self):
-        return "<Concern %s>" % self.user_id
+        return "<Wantto %s>" % self.user_id
 
     def _store_to_db(self):
         db.session.add(self)

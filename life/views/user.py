@@ -163,6 +163,10 @@ def wantto(id):
 
     return redirect(url_for('frontend.spot_one', id=id))
 
+@user.route("/wb")
+def manager_been_want():
+    pass
+
 ## @user.route("/wb")
 ## def manager_been_want():
 
