@@ -165,7 +165,10 @@ def wantto(id):
 
 @user.route("/wb")
 def manager_been_want():
-    pass
+    username = current_user.name
+    user_id = get_user_id(username)
+
+    
 
 ## @user.route("/wb")
 ## def manager_been_want():
