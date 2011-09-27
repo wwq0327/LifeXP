@@ -60,7 +60,7 @@ class Beento(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer)
     spot_id = db.Column(db.Integer)
-    beento = db.Column(db.Boolean())
+    ##beento = db.Column(db.Boolean())
     ##wantto = db.Column(db.Boolean())
 
     def __init__(self, *args, **kwargs):
@@ -80,7 +80,7 @@ class Wantto(db.Model):
     user_id = db.Column(db.Integer)
     spot_id = db.Column(db.Integer)
     ##beento = db.Column(db.Boolean())
-    wantto = db.Column(db.Boolean())
+    ##wantto = db.Column(db.Boolean())
 
     def __init__(self, *args, **kwargs):
         super(Wantto, self).__init__(*args, **kwargs)
