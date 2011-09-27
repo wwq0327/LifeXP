@@ -2,19 +2,20 @@
 
 {% block content %}
 
-== 想去的地方 == <br />
+== 去过的地方 == <br />
 
-{% if not spots %}
+{% if not bts %}
   <b> 暂时没有数据 </b>
 {% else %}
-  {% for spot in spots %}
+  {% for bt in bts %}
    <ol>
-     <li> {{ spot[1] }}</li>
+     <li> {{ bt[1] }}</li>
   </ol>
   {% endfor %}
 {% endif %}
 
-== 去过的地方 == <br />
+  <br />
+== 想去的地方 == <br />
   
 {% if not wts %}
   <b> 暂时没有数据 </b>

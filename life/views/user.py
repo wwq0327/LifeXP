@@ -163,9 +163,27 @@ def wantto(id):
 
 @user.route("/wb")
 def manager_been_want():
+    bts = []
+    wts = []
+    
     username = current_user.name
     user_id = get_user_id(username)
 
+    bt = Beento.query.filter_by(user_id=user_id).all()
+
+    for b in bt:
+        spot = Spot.query.filter_by(id=b.spot_id).first()
+
+        bts.append([spot.id, spot.spot_name])
+
+    wt = Wantto.query.filter_by(user_id=user_id).all()
+
+    for w in wt:
+        spot = Spot.query.filter_by(id=w.spot_id).first()
+
+        wts.append([spot.id, spot.spot_name])
+
+    return render_template('user/wb.html', bts=bts, wts=wts)
     
 
 ## @user.route("/wb")
