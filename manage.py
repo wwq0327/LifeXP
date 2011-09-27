@@ -18,7 +18,7 @@ from flaskext.script import Manager, Server, prompt_bool, prompt, prompt_pass
 
 from life import create_app
 from life.extensions import db
-from life.models import Spot, User, Concern
+from life.models import Spot, User, Beento, Wantto
 
 manager = Manager(create_app)
 
@@ -81,7 +81,8 @@ def make_shell_context():
                 db=db,
                 Spot=Spot,
                 User=User,
-                Concern=Concern)
+                Beento=Beento,
+                Wantto=Wantto)
 
 if __name__ == '__main__':
     manager.run()

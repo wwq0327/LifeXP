@@ -54,14 +54,14 @@ class LoginUser(UserMixin):
     def is_active(self):
         return self.active
 
-class Concern(db.Model):
-    __tablename__ = 'concern'
+class Beento(db.Model):
+    __tablename__ = 'beento'
     
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer)
     spot_id = db.Column(db.Integer)
     beento = db.Column(db.Boolean())
-    wantto = db.Column(db.Boolean())
+    ##wantto = db.Column(db.Boolean())
 
     def __init__(self, *args, **kwargs):
         super(Concern, self).__init__(*args, **kwargs)
@@ -73,3 +73,21 @@ class Concern(db.Model):
         db.session.add(self)
         db.session.commit()
 
+class Wantto(db.Model):
+    __tablename__ = 'wantto'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    spot_id = db.Column(db.Integer)
+    ##beento = db.Column(db.Boolean())
+    wantto = db.Column(db.Boolean())
+
+    def __init__(self, *args, **kwargs):
+        super(Concern, self).__init__(*args, **kwargs)
+
+    def _repr__(self):
+        return "<Concern %s>" % self.user_id
+
+    def _store_to_db(self):
+        db.session.add(self)
+        db.session.commit()

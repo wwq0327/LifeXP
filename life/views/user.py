@@ -19,7 +19,7 @@ from flaskext.uploads import UploadNotAllowed
 from flaskext.login import login_required, current_user  ## 用户登录认证
 
 from life.extensions import db, photos
-from life.models import Spot, Concern, User
+from life.models import Spot, User, Beento, Wantto
 from life.forms import SpotForm
 
 ## 用户后台管理视图
@@ -132,7 +132,7 @@ def beento(id):
     print current_user.name
     user_id = get_user_id(current_user.name)
 
-    con = Concern(user_id=user_id,
+    con = Beento(user_id=user_id,
                   spot_id = id,
                   beento = True)
     try:
@@ -151,7 +151,7 @@ def wantto(id):
     
     user_id = get_user_id(current_user.name)
 
-    con = Concern(user_id=user_id,
+    con = Wantto(user_id=user_id,
                   spot_id=id,
                   wantto=True)
 
@@ -163,33 +163,33 @@ def wantto(id):
 
     return redirect(url_for('frontend.spot_one', id=id))
 
-@user.route("/wb")
-def manager_been_want():
+## @user.route("/wb")
+## def manager_been_want():
 
-    """TODO
-    ~~~~~~~~~~~~~~
-    根据用户ID，得到Spot_id，检索出相关景点标题，这是一个列表，暂时不知道如何处理。
-    """
+##     """TODO
+##     ~~~~~~~~~~~~~~
+##     根据用户ID，得到Spot_id，检索出相关景点标题，这是一个列表，暂时不知道如何处理。
+##     """
 
-    spots = []
-    wts = []
+##     spots = []
+##     wts = []
     
-    username = current_user.name
-    user_id = get_user_id(username)
-    wb = Concern.query.filter_by(user_id=user_id).all() ## 获得Concern中 某用户的所有数据条
+##     username = current_user.name
+##     user_id = get_user_id(username)
+##     wb = Concern.query.filter_by(user_id=user_id).all() ## 获得Concern中 某用户的所有数据条
 
-    for w in wb:
-        if w.beento == False:
-            continue
-        spot = Spot.query.filter_by(id=w.spot_id).first()
+##     for w in wb:
+##         if w.beento == False:
+##             continue
+##         spot = Spot.query.filter_by(id=w.spot_id).first()
 
-        spots.append([spot.id, spot.spot_name])
+##         spots.append([spot.id, spot.spot_name])
 
-    for w in wb:
-        if w.wantto == False:
-            continue
-        wt = Spot.query.filter_by(id=w.spot_id).first()
-        wts.append([wt.id, wt.spot_name])
+##     for w in wb:
+##         if w.wantto == False:
+##             continue
+##         wt = Spot.query.filter_by(id=w.spot_id).first()
+##         wts.append([wt.id, wt.spot_name])
         
-    return render_template('user/wb.html', spots=spots, wts=wts)
+##     return render_template('user/wb.html', spots=spots, wts=wts)
     
