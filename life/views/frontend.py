@@ -12,7 +12,7 @@
 
 from flask import Blueprint, Module, render_template
 
-from life.models import Spot, Bennto, Wantto
+from life.models import Spot, Beento, Wantto
 
 #frontend = Module(__name__)
 frontend  = Blueprint('frontend', __name__)
