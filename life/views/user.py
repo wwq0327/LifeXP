@@ -133,8 +133,7 @@ def beento(id):
     user_id = get_user_id(current_user.name)
 
     con = Beento(user_id=user_id,
-                  spot_id = id,
-                  beento = True)
+                  spot_id = id)
     try:
         con._store_to_db()
         flash(u"你又多了一个去过的地主！")
@@ -152,8 +151,7 @@ def wantto(id):
     user_id = get_user_id(current_user.name)
 
     con = Wantto(user_id=user_id,
-                  spot_id=id,
-                  wantto=True)
+                  spot_id=id)
 
     try:
         con._store_to_db()
